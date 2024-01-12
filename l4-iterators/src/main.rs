@@ -16,14 +16,42 @@ fn main() {
             continue;
         }
         println!("Iterator skipping on num - {}", n);
-    }//Переход к следующему шагу внутри итератора при помиощи continue
+    }//Пропуск оставшейся части цикла при помощи continue
 
     let mut count = 0;
-    let time_limit = Duration::new(5, 0);
+    let time_limit = Duration::new(2, 0);
     let start = Instant::now();
 
+    //Выполнение цикла пока не изменится состояние условия
     while (Instant::now() - start) < time_limit {
         count += 1;
     }
     println!("{}", count);
+
+    /* 
+    while true {
+        println!("Fuck loop");
+    }
+    //НЕ ИСПОЛЬЗОВАТЬ т.к. существует loop для бесконечных циклов
+    */
+    let mut iter2 = 0;
+    loop {
+        println!("Test loop");
+        iter2 += 1;
+        println!("{}", iter2);
+        
+        if iter2 == 100 {
+            break;
+        }
+    }//Стандартный бесконечный цикл с прерыванием по выполнении условия
+
+    'outer_heaven: for x in 0..10 {
+        println!("Work outer iterator");
+        println!("{}", x);
+        for y in 0..10 {
+            if y + x > 10 {
+                break 'outer_heaven;
+            }
+        }
+    }//Прерывание внешнего цикла при помощи метки и выполнения условия - метка замена goto, работает аналогично для continue 
 }
